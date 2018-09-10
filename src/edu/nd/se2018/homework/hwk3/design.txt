@@ -1,0 +1,17 @@
+My Program is divided into 3 files the Main class where one can create a race add horses to it
+and run the race. It has a Race class that keeps track of every horse in the race as well as 
+how many horse are in the race. The race class has a method to add horses to the race with such
+things as horse name their max speed and their strategy as the arguments. Finally the Race class
+has a start race function that creates a thread for every horse so they can "race" in parrallel.
+Since the race class has horses I created a horse class. When a horse is created it display info
+on it for debugging purposes. The horse class has a method to change the strategy of the current
+horse. In order to run the horses in parrallel with the threads this class has a run method.
+The run method increments a counter depending on the strategy picked. The ammount that the counter
+will go up depends on if it has passed predetermined thresholds. Periodically we interrupt so
+the program prints out where each horse is in the race. Once the counter reaches the final threshold
+it prints out that the horse has finished. The reason for dividing the race and horse class is 
+in order to follow object oriented programming practices. The race HAS A horse (or multiple for that
+matter) and we need to instantiate multiple instances of horses with different names and strategies.
+As such two classes were created to facilitate this. In addition to this the Horse class implements
+Runnable. This was done in order to be able to run some of its methods in parrallel with other 
+Horse instances through threads.
