@@ -1,5 +1,5 @@
-package edu.nd.se2018.homework.hwk2;
-import edu.nd.se2018.homework.hwk2.Horse;
+package edu.nd.se2018.homework.hwk3;
+import edu.nd.se2018.homework.hwk3.Horse;
 
 
 public class Race{
@@ -10,12 +10,12 @@ public class Race{
 	int Racers = 0;
 	
 	// Add Horse
-	void addHorse(String name, int number,int speed, int strategy){
+	void addHorse(String name,int speed, int strategy){
 		if(this.Racers >= 10) {
 			System.out.println("Only 10 Horses allowed in a single Race!");
 			return;
 		}
-		Horse myHorse= new Horse(name, number, speed, strategy);
+		Horse myHorse= new Horse(name,speed, strategy);
 		// Store horse in array of horses
 		this.Horses[Racers]= myHorse;
 		
