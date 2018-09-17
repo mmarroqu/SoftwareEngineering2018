@@ -1,0 +1,6 @@
+What I liked about my design is that by implementing and extending classes, I was able to facilitate the behavior of the ships specifically 
+the observer and observable behaviors. Additionally, by creating instances of the pirate class, I was able to easily add many pirates.
+The way the classes interacted made it easy to keep track of what grids were taken and which were not. If I were to extend the design,
+for example the game reset, I would have a button and an event handler to reset everything by making every grid empty again and finding
+positions for everything again. This would have to be handled by the oceanmap class. To add pictures to the islands I would simply add an
+image view for the islands instead of just making them green.
