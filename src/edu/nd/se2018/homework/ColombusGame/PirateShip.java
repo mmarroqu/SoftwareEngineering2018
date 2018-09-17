@@ -47,16 +47,29 @@ public class PirateShip implements Observer{
 	}
 	
 	private void movePirate() {
-		
-		if (piratePosition.x - ccPosition.x < 0 && !mapGrid[piratePosition.x+1][piratePosition.y])
+		// Only move if there is no island or another pirate ship adjancet and will not be out of bounds after move
+		if (piratePosition.x - ccPosition.x < 0 && !mapGrid[piratePosition.x+1][piratePosition.y] && piratePosition.x+1 < 25 ) {
+			mapGrid[piratePosition.x][piratePosition.y] = false;
+			mapGrid[piratePosition.x+1][piratePosition.y] = true;
 			piratePosition.x++;
-		else if(!mapGrid[piratePosition.x-1][piratePosition.y])
+		}
+		else if(!mapGrid[piratePosition.x-1][piratePosition.y] && piratePosition.x-1 > 0) {
+			mapGrid[piratePosition.x][piratePosition.y] = false;
+			mapGrid[piratePosition.x-1][piratePosition.y] = true;
 			piratePosition.x--;
-		
-		if (piratePosition.y - ccPosition.y < 0 && !mapGrid[piratePosition.x][piratePosition.y+1])
+			
+		}
+		// Only move if there is no island or another pirate ship adjancet and will not be out of bounds after move
+		if (piratePosition.y - ccPosition.y < 0 && !mapGrid[piratePosition.x][piratePosition.y+1] && piratePosition.y+1 < 25) {
+			mapGrid[piratePosition.x][piratePosition.y] = false;
+			mapGrid[piratePosition.x][piratePosition.y+1] = true;
 			piratePosition.y++;
-		else if (!mapGrid[piratePosition.x][piratePosition.y-1])
+		}
+		else if (!mapGrid[piratePosition.x][piratePosition.y-1] && piratePosition.y-1 > 0) {
+			mapGrid[piratePosition.x][piratePosition.y] = false;
+			mapGrid[piratePosition.x][piratePosition.y-1] = true;
 			piratePosition.y--;
+		}
 		
 		
 	}
