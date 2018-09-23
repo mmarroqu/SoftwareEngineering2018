@@ -15,15 +15,21 @@ public class Train extends Observable implements IVehicle{
 	private double currentX = 0;
 	private double currentY = 0;
 	private double originalX = 0;
+	public boolean goingEast = false;
 	private Image img;
 	private ImageView imgView;
 	private int trainLength = 35;
 	
-	public Train(int x, int y){
+	public Train(int x, int y, boolean direction){
 		this.currentX = x;
 		this.currentY = y;
 		originalX = x;
-		img = new Image("images\\Train.PNG",120,trainLength,false,false);
+		goingEast = direction;
+		if(direction){
+			img = new Image("images\\TrainFlipped.PNG",120,trainLength,false,false);
+		}
+		else
+			img = new Image("images\\Train.PNG",120,trainLength,false,false);
 		imgView = new ImageView(img);
 		imgView.setX(currentX);
 		imgView.setY(currentY);
@@ -38,14 +44,19 @@ public class Train extends Observable implements IVehicle{
 	}
 	
 	public void move(){
-		currentX-=2;
+		if(goingEast)
+			currentX+=2;
+		else
+			currentX-=2;
 		imgView.setX(currentX);
 		setChanged();
 		notifyObservers();
 	}
 	
 	public boolean offScreen(){
-		if (currentX < -200)
+		if (currentX < -200 && !(goingEast))
+			return true;
+		else if (currentX > 1500 && goingEast)
 			return true;
 		else
 			return false;				

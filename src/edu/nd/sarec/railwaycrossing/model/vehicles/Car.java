@@ -15,12 +15,15 @@ import javafx.scene.image.ImageView;
  */
 public class Car extends Observable implements IVehicle, Observer{
 	private ImageView ivCar;
-	private double currentX = 0;
+	public double currentX = 0;
 	private double currentY = 0;
 	private double originalY = 0;
 	private boolean gateDown = false;
 	private double leadCarY = -1;  // Current Y position of car directly infront of this one
+	private double leadCarX = -1;
 	private double speed = 0.5;
+	private boolean horizontalMove = false;
+	
 		
 	/**
 	 * Constructor
@@ -59,16 +62,33 @@ public class Car extends Observable implements IVehicle, Observer{
 		if (gateDown && getVehicleY() < 430 && getVehicleY()> 390)
 			canMove = false;
 		
-		// Second case. Car is too close too other car.
+		// Second case. Car is too close to other car.
 		if (leadCarY != -1  && getDistanceToLeadCar() < 50)
 			canMove = false;
 		
-		if (canMove){
+		if (canMove && !horizontalMove){
 			currentY+=speed;
+			
 			ivCar.setY(currentY);
 			setChanged();
 			notifyObservers();
 		}
+		else if (canMove && horizontalMove) {
+			currentX-=speed;
+			ivCar.setX(currentX);
+			setChanged();
+			notifyObservers();
+		}
+		
+		// If car is at T randomly turn 
+		if(currentY > 799.5 && currentY < 800.5 && currentX>400) {
+			horizontalMove = true;
+			
+		}
+	
+		
+		
+		
 	}
 	
 	public void setSpeed(double speed){
@@ -102,7 +122,8 @@ public class Car extends Observable implements IVehicle, Observer{
 	public void update(Observable o, Object arg1) {
 		if (o instanceof Car){
 			leadCarY = (((Car)o).getVehicleY());
-			if (leadCarY > 1020)
+			leadCarX = (((Car)o).getVehicleX());
+			if (leadCarY > 1020 )
 				leadCarY = -1;
 		}
 			

@@ -47,7 +47,9 @@ public class CarFactory {
 			// Each car must observe the car infront of it so it doesn't collide with it.
 			if (previousCar != null)
 				previousCar.addObserver(car);
+			
 			previousCar = car;
+			
 			
 			cars.add(car);
 			return car;
@@ -66,6 +68,10 @@ public class CarFactory {
 			car.move();					
 			if (car.offScreen())
 				toDelete.add(car);
+			// Check/Put if at T
+			// If at T then we remove observer
+			// Add to new car list
+			
 			
 		}   
 		for (Car car: toDelete)
