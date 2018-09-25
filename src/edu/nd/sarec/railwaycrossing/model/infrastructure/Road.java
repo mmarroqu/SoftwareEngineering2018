@@ -17,7 +17,7 @@ public class Road {
 	private int endX;
 	private int startY;
 	private int endY;
-	private CarFactory carFactory;
+	public CarFactory carFactory;
 	Direction direction;
 	Collection<CrossingGate> gates;
 	boolean clearEnds = false;

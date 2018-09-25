@@ -12,7 +12,7 @@ import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
  *
  */
 public class MapBuilder {
-	HashMap<String, Road> roads;
+	public HashMap<String, Road> roads;
 	HashMap<String, CrossingGate> gates;
 	HashMap<String, RailwayTracks> tracks;
 	
@@ -51,6 +51,7 @@ public class MapBuilder {
 	private void buildCarFactories(){
 		roads.get("Western Highway").addCarFactory();
 		roads.get("Skyway").addCarFactory();
+		roads.get("EastWest").addCarFactory();
 	}
 	
 	public Collection<CrossingGate> getAllGates(){

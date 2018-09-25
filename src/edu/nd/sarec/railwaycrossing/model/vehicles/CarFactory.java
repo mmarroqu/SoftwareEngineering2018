@@ -18,6 +18,7 @@ public class CarFactory {
 	private Collection<CrossingGate> gates = null;
 	private Car previousCar = null;
 	private ArrayList<Car> cars = new ArrayList<Car>();
+	public ArrayList<Car> turnedCars = new ArrayList<Car>();
 	Direction direction;
 	Point location;
 	
@@ -68,14 +69,25 @@ public class CarFactory {
 			car.move();					
 			if (car.offScreen())
 				toDelete.add(car);
-			// Check/Put if at T
-			// If at T then we remove observer
-			// Add to new car list
-			
+			if (car.turned() && direction!=Direction.EAST) {
+				// Add car to turned cars. 
+				turnedCars.add(car);
+				// Add car to the deleted cars
+				toDelete.add(car);
+			}
 			
 		}   
+		// Delete car that has gone off the screen or has moved to the road. 
 		for (Car car: toDelete)
 			cars.remove(car);
 		return toDelete;
 	}
+	public ArrayList<Car> getTurnedCarsList() {
+		return ((ArrayList <Car>) turnedCars.clone());
+	}
+
+	public void addCar(Car car) {
+		cars.add(car);
+	}
+	
 }

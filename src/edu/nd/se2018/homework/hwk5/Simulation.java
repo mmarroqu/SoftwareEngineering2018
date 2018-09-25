@@ -1,8 +1,9 @@
-package edu.nd.sarec.railwaycrossing;
+package edu.nd.se2018.homework.hwk5;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
@@ -69,6 +70,7 @@ public class Simulation extends Application{
 			public void handle(long now) {
 			
 				createCar();
+				transferCars(mapBuilder.roads.get("Western Highway"), mapBuilder.roads.get("EastWest"));
 				train.move();
 				secondTrain.move();
 				// Prompts observer of trains to check if we can close gates
@@ -88,6 +90,25 @@ public class Simulation extends Application{
 		}.start();
 	}
 	
+	private void transferCars(Road roadFrom, Road roadTo) {
+		// Get Cars from East Road
+		Car previousCar= null;
+		for(Car car: roadFrom.carFactory.turnedCars) {
+			// Append Cars to end of list for eastWest
+			root.getChildren().remove(car.getImageView());
+			roadTo.carFactory.addCar(car);
+			if(previousCar!=null)
+					previousCar.addObserver(car);
+			root.getChildren().add(car.getImageView());
+			previousCar=car;
+		}
+		// Reset the list
+		roadFrom.carFactory.turnedCars= new ArrayList<Car>();;
+		
+		// add observer relationship
+		
+	}
+	
 	// Clears cars as they leave the simulation
 	private void clearCars(){
 		Collection<Road> roads = mapBuilder.getRoads();
@@ -95,6 +116,7 @@ public class Simulation extends Application{
 			if (road.getCarFactory()!= null){
 				ArrayList<Car> junkCars = road.getCarFactory().removeOffScreenCars();	
 				mapDisplay.removeCarImages(junkCars);
+				
 			}
 		}
 	}
@@ -103,12 +125,13 @@ public class Simulation extends Application{
 		Collection<Road> roads = mapBuilder.getRoads();
 		for(Road road: roads){
 			if (road.getCarFactory() != null){
-				if ((int)(Math.random() * 100) == 15){
+				if ((int)(Math.random() * 100) == 15 && road.getDirection() != Direction.EAST){
 					Car car = road.getCarFactory().buildCar();
 					if (car != null){
 						root.getChildren().add(car.getImageView());
 					}
 				}
+					
 			}
 		}
 	}
