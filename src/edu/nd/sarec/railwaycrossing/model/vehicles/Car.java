@@ -15,16 +15,16 @@ import javafx.scene.image.ImageView;
  */
 public class Car extends Observable implements IVehicle, Observer{
 	private ImageView ivCar;
-	private int numMoves=0;
 	public double currentX = 0;
-	private double currentY = 0;
+	public double currentY = 0;
 	private double originalY = 0;
 	private double originalX = 0;
 	private boolean gateDown = false;
 	private double leadCarY = -1;  // Current Y position of car directly infront of this one
 	private double leadCarX = -1;
 	private double speed = 0.5;
-	private boolean horizontalMove = false;
+	public boolean horizontalMove = false;
+	public boolean canMerge = false;
 	
 		
 	/**
@@ -60,27 +60,35 @@ public class Car extends Observable implements IVehicle, Observer{
 	
 	public void move(){
 		boolean canMove = true; 
-		numMoves++;
+	
 		// First case.  Car is at the front of the stopping line.
 		if (gateDown && getVehicleY() < 430 && getVehicleY()> 390)
 			canMove = false;
 		
 		// Second case. Car is too close to other car going south.
-		if (leadCarY != -1 && getDistanceToLeadCar() < 50)
+		if (leadCarY != -1 && getDistanceToLeadCar() < 50) {
 			canMove = false;
-		
-		// If moving horizontally and xDistance of leadCar not short
-		if (horizontalMove && getXDistanceToLeadCar() < 50) {
-			canMove = false;
-			System.out.println("cant move");
+			
 		}
 		
+		// If moving horizontally and xDistance of leadCar not short
+		if (leadCarY == -1 &&(leadCarY-currentY)<3 && horizontalMove && getXDistanceToLeadCar() < 50) {
+			canMove = false;
+			//System.out.println("cant move");
+		}
+		// If waiting to re merge
+		if(horizontalMove && currentX > 398 && currentX < 401) {
+			canMove = false;
+			canMerge = true;
+		}
+		
+		// If moving down
 		if (canMove && !horizontalMove){
 			currentY+=speed;
 			ivCar.setY(currentY);
 		}
 		
-		
+		// If moving horizontal
 		else if (canMove && horizontalMove) {
 			currentX-=speed;
 			ivCar.setX(currentX);
@@ -92,6 +100,7 @@ public class Car extends Observable implements IVehicle, Observer{
 		if(currentY > 794.5 && currentY < 795.5 && currentX>400) {
 			horizontalMove = true;
 		}
+		
 	
 		
 		
@@ -107,8 +116,11 @@ public class Car extends Observable implements IVehicle, Observer{
 	}
 	
 	public boolean offScreen(){
-		if (currentY > 1020)
+		if (currentY > 1020) {
+			setChanged();
+			notifyObservers();
 			return true;
+		}
 		else if(currentX < 0)
 			return true;
 		else
@@ -123,7 +135,7 @@ public class Car extends Observable implements IVehicle, Observer{
 		return Math.abs(leadCarY-getVehicleY());
 	}
 	public double getXDistanceToLeadCar(){
-		System.out.println(leadCarX);
+		//System.out.println(leadCarX);
 		//if(leadCarX<=-1)
 			//return 51;
 		return Math.abs(getVehicleX()-leadCarX);
@@ -138,11 +150,17 @@ public class Car extends Observable implements IVehicle, Observer{
 			leadCarY = (((Car)o).getVehicleY());
 			if(((Car)o).horizontalMove == true)		
 				leadCarX = (((Car)o).getVehicleX());
-			if (leadCarY > 1020 )
+			
+			// If car goes off screen
+			if (leadCarY > 1000 ) {
 				leadCarY = -1;
+				leadCarX = -1;
+			}
+			
 			if(leadCarX < originalX && ((Car)o).horizontalMove == true) {
 				removeLeadCar();
 			}
+			
 		}
 		else if (o instanceof CrossingGate){
 			CrossingGate gate = (CrossingGate)o;
@@ -152,15 +170,18 @@ public class Car extends Observable implements IVehicle, Observer{
 				gateDown = false;
 					
 		}
-		else {
-			System.out.println("car dead");
-			leadCarY = -1;
-			leadCarX = -1;
-		}
+		
+		
+			
+		
 	}
 
 	public boolean turned() {
 		// If direction is between range and direction of 
 		return (currentX < originalX);
+	}
+	public boolean canMerge() {
+		// If direction is between range and direction of 
+		return (canMerge);
 	}	
 }

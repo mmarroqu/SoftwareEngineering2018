@@ -25,7 +25,7 @@ public class Simulation extends Application{
 	private MapBuilder mapBuilder;
 	private MapDisplay mapDisplay;
 	private TrainsPresent allTrains;
-	
+	private Car previousCar= null;
 	@Override  
 	public void start(Stage stage) throws Exception {
 		
@@ -69,8 +69,11 @@ public class Simulation extends Application{
 			@Override
 			public void handle(long now) {
 			
-				createCar();
+				
 				transferCars(mapBuilder.roads.get("Western Highway"), mapBuilder.roads.get("EastWest"));
+				if(!mapBuilder.roads.get("EastWest").carFactory.carsToMerge.isEmpty())
+					remergeCars(mapBuilder.roads.get("EastWest"), mapBuilder.roads.get("Skyway"));
+				createCar();
 				train.move();
 				secondTrain.move();
 				// Prompts observer of trains to check if we can close gates
@@ -87,25 +90,53 @@ public class Simulation extends Application{
 						
 				clearCars();				
 			}
+
+		
 		}.start();
 	}
 	
 	private void transferCars(Road roadFrom, Road roadTo) {
 		// Get Cars from East Road
-		Car previousCar= null;
 		for(Car car: roadFrom.carFactory.turnedCars) {
 			// Append Cars to end of list for eastWest
 			root.getChildren().remove(car.getImageView());
 			roadTo.carFactory.addCar(car);
+			
+			// Create Observer Relationship
 			if(previousCar!=null)
 					previousCar.addObserver(car);
 			root.getChildren().add(car.getImageView());
 			previousCar=car;
 		}
 		// Reset the list
-		roadFrom.carFactory.turnedCars= new ArrayList<Car>();;
+		roadFrom.carFactory.turnedCars= new ArrayList<Car>();
 		
-		// add observer relationship
+		
+	}
+	
+	private void remergeCars(Road roadFrom, Road roadTo) {
+		Car lastCar = new Car(0,0);
+
+		for(Car car: roadFrom.carFactory.carsToMerge) {
+			lastCar=roadTo.carFactory.cars.get(0);
+			// Check if first car is before intersection
+			//System.out.println(lastCar.currentY);
+			if(lastCar.currentY < 750) {
+				//System.out.println("can merge");
+				car.horizontalMove=false;
+				//roadFrom.carFactory.removeCar(car);
+				//roadFrom.carFactory.carsToMerge.remove(car);
+				//root.getChildren().remove(car.getImageView());
+				//roadTo.carFactory.addCar(car);
+				//root.getChildren().add(car.getImageView());
+				
+				
+			}
+			else {
+				//System.out.println(lastCar.currentY);
+				//System.out.println("CANT merge");
+			}
+		}
 		
 	}
 	

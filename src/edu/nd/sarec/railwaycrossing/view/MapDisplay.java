@@ -21,7 +21,7 @@ public class MapDisplay {
 	Collection<RailwayTracks> track;
 	Collection<CrossingGate> gates;
 	
-	
+	 
 	public MapDisplay(Pane root, Collection<Road> roads, Collection<RailwayTracks> tracks, Collection<CrossingGate> gates){
 		this.root = root;
 		this.roads= roads;

@@ -17,8 +17,9 @@ public class CarFactory {
 	
 	private Collection<CrossingGate> gates = null;
 	private Car previousCar = null;
-	private ArrayList<Car> cars = new ArrayList<Car>();
+	public ArrayList<Car> cars = new ArrayList<Car>();
 	public ArrayList<Car> turnedCars = new ArrayList<Car>();
+	public ArrayList<Car> carsToMerge = new ArrayList<Car>();
 	Direction direction;
 	Point location;
 	
@@ -75,19 +76,27 @@ public class CarFactory {
 				// Add car to the deleted cars
 				toDelete.add(car);
 			}
+			else if(car.canMerge() ) {
+				//car.canMerge=false;
+				carsToMerge.add(car);
+				//toDelete.add(car);
+			}
 			
 		}   
-		// Delete car that has gone off the screen or has moved to the road. 
+		// Delete car that has gone off the screen or has changed road 
 		for (Car car: toDelete)
 			cars.remove(car);
 		return toDelete;
 	}
 	public ArrayList<Car> getTurnedCarsList() {
-		return ((ArrayList <Car>) turnedCars.clone());
+		return (turnedCars);
 	}
 
 	public void addCar(Car car) {
 		cars.add(car);
+	}
+	public void removeCar(Car car) {
+		cars.remove(car);
 	}
 	
 }

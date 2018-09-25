@@ -26,7 +26,7 @@ public class MapBuilder {
 		assignGatesToRoads();
 		buildCarFactories();
 	}
-
+ 
 	private void buildRoads(){
 		roads.put("Western Highway",new Road(new Point(800,0),new Point (800,1000),Direction.SOUTH,true,false));
 		roads.put("Skyway",new Road(new Point(400,0),new Point (400,1000),Direction.SOUTH,true,false));		

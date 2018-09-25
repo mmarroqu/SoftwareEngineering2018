@@ -52,7 +52,7 @@ public class CrossingGate extends Observable implements Observer{
 		line = new Line(anchorX, anchorY,movingX,movingY);
 		line.setStroke(Color.RED);
 	    line.setStrokeWidth(10);
-		
+		 
 		// Gate States
 		gateClosed = new GateClosed(this);
 		gateOpen = new GateOpen(this);
