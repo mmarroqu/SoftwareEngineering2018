@@ -6,11 +6,7 @@ import java.util.Collection;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
-import edu.nd.sarec.railwaycrossing.model.vehicles.Car;
-import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
-import edu.nd.sarec.railwaycrossing.model.vehicles.TrainsPresent;
 import edu.nd.sarec.railwaycrossing.view.MapDisplay;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -58,8 +54,8 @@ public class Simulation extends Application{
 		allTrains.addTrain(secondTrain);
 		
 		for(CrossingGate gate: mapBuilder.getAllGates()) {
-			//train.addObserver(gate);
-			//secondTrain.addObserver(gate);
+			train.addObserver(gate);
+			secondTrain.addObserver(gate);
 			allTrains.addObserver(gate);
 		}
 				
@@ -105,6 +101,7 @@ public class Simulation extends Application{
 			// Create Observer Relationship
 			if(previousCar!=null)
 					previousCar.addObserver(car);
+			car.getImageView().setRotate(90);
 			root.getChildren().add(car.getImageView());
 			previousCar=car;
 		}
@@ -124,17 +121,10 @@ public class Simulation extends Application{
 			if(lastCar.currentY < 750) {
 				//System.out.println("can merge");
 				car.horizontalMove=false;
-				//roadFrom.carFactory.removeCar(car);
-				//roadFrom.carFactory.carsToMerge.remove(car);
-				//root.getChildren().remove(car.getImageView());
-				//roadTo.carFactory.addCar(car);
-				//root.getChildren().add(car.getImageView());
+				car.getImageView().setRotate(0);
+		
 				
 				
-			}
-			else {
-				//System.out.println(lastCar.currentY);
-				//System.out.println("CANT merge");
 			}
 		}
 		

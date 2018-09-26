@@ -1,4 +1,4 @@
-package edu.nd.sarec.railwaycrossing.model.vehicles;
+package edu.nd.se2018.homework.hwk5;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -77,9 +77,7 @@ public class CarFactory {
 				toDelete.add(car);
 			}
 			else if(car.canMerge() ) {
-				//car.canMerge=false;
 				carsToMerge.add(car);
-				//toDelete.add(car);
 			}
 			
 		}   

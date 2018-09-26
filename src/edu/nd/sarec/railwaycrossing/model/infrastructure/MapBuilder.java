@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
+import edu.nd.se2018.homework.hwk5.Road;
 
 /**
  * Creates all infrastructure for the simulation

@@ -1,7 +1,8 @@
-package edu.nd.sarec.railwaycrossing.model.vehicles;
+package edu.nd.se2018.homework.hwk5;
 
 import java.util.Observable;
 
+import edu.nd.sarec.railwaycrossing.model.vehicles.IVehicle;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

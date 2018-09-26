@@ -3,7 +3,7 @@ package edu.nd.sarec.railwaycrossing.view;
 import java.util.Collection;
 
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
+import edu.nd.se2018.homework.hwk5.Road;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;

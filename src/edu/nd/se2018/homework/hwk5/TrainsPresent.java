@@ -1,6 +1,5 @@
-package edu.nd.sarec.railwaycrossing.model.vehicles;
+package edu.nd.se2018.homework.hwk5;
 
-import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
 import java.util.Observable;
 
 public class TrainsPresent extends Observable{

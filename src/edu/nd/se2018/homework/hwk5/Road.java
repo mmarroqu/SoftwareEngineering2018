@@ -1,11 +1,11 @@
-package edu.nd.sarec.railwaycrossing.model.infrastructure;
+package edu.nd.se2018.homework.hwk5;
 
 import java.awt.Point;
 import java.util.Collection;
 import java.util.Vector;
 
+import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
-import edu.nd.sarec.railwaycrossing.model.vehicles.CarFactory;
 
 /**
  * Represents a single road

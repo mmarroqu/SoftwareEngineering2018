@@ -3,8 +3,7 @@ package edu.nd.sarec.railwaycrossing.model.infrastructure.gate;
 import java.util.Observable;
 import java.util.Observer;
 
-import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
-import edu.nd.sarec.railwaycrossing.model.vehicles.TrainsPresent;
+import edu.nd.se2018.homework.hwk5.TrainsPresent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -25,7 +24,7 @@ public class CrossingGate extends Observable implements Observer{
 	private int exitPoint;
 	private int triggerPointEast;
 	private int exitPointEast;
-	private int trainsApproaching=0;
+
 
 	private IGateState gateClosed;
 	private IGateState gateOpen;

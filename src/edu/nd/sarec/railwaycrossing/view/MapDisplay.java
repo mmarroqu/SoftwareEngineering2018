@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
-import edu.nd.sarec.railwaycrossing.model.vehicles.Car;
+import edu.nd.se2018.homework.hwk5.Car;
+import edu.nd.se2018.homework.hwk5.Road;
 import javafx.scene.layout.Pane;
 
 /**
