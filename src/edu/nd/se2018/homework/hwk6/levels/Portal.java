@@ -30,7 +30,6 @@ public class Portal implements Observer {
 		if( o instanceof Player) {
 			Player player = (Player)o;
 			if(player.getPlayerLocation().x==X && player.getPlayerLocation().y==Y) {
-				System.out.println("Go to new level");
 				player.nextLevel=1;
 			}
 		}

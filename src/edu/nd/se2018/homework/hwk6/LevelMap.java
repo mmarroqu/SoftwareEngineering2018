@@ -44,11 +44,10 @@ public class LevelMap {
 			keys= new LinkedList<Key>();
 		    gates= new LinkedList<Gate>();
 		    monsters= new LinkedList<Monster>();
-			System.out.println("Level 2");
 			levelGrid = new int[25][25];
 			level = new Level02();
 			level.buildWalls(root, levelGrid, player,keys,gates, monsters);
-			System.out.println(monsters);
+			
 		}
 
 				

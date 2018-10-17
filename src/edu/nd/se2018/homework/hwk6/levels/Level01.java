@@ -47,7 +47,7 @@ public class Level01 implements Level {
 				         18,18,18,19,20,21,
 				         6,6,6,5,4,3,
 				         18,18,18,19,20,21,
-				         10,11,12,10,12,10,12};
+				         11,12,13,11,13,11,13};
 		int[] cornersY = {4,6,7,7,7,7,
 						 4,6,7,7,7,7,
 						 20,19,17,17,17,17,
@@ -102,15 +102,15 @@ public class Level01 implements Level {
 		levelGrid[6][18] = 1;
 		
 	
-		Gate blueGate = new Gate(11,13,root,"blue");
+		Gate blueGate = new Gate(12,13,root,"blue");
 		blueKey.addObserver(blueGate);
 		gates.add(blueGate);
-		levelGrid[11][13] = 1;
+		levelGrid[12][13] = 1;
 		
 		
 		// Place Portal
-		Portal exitPortal = new Portal(11,12, root);
-		levelGrid[11][12] = 5;
+		Portal exitPortal = new Portal(12,12, root);
+		levelGrid[12][12] = 5;
 		player.addObserver(exitPortal);
 		
 		

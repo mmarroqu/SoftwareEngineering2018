@@ -29,9 +29,7 @@ public class Gate implements Observer {
 		// TODO Auto-generated method stub
 		if(o instanceof Key) {
 			Key key=(Key)o;
-			System.out.println(key.acquired);
 			if(key.acquired==1) {
-				System.out.println("got key");
 				locked=false;
 			}
 		}
